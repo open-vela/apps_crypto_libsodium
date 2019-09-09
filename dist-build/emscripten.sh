@@ -116,16 +116,13 @@ if [ "$DIST" = yes ]; then
         }
       };
       Module.useBackupModule = function() {
-        var Module = {};
-        $(cat "${PREFIX}/lib/libsodium.asm.tmp.js" | sed 's|use asm||g')
-        Object.keys(_Module).forEach(function(k) {
+        var Module = _Module;
+        Object.keys(Module).forEach(function(k) {
           if (k !== 'getRandomValue') {
-            delete _Module[k];
+            delete Module[k];
           }
         });
-        Object.keys(Module).forEach(function(k) {
-          _Module[k] = Module[k];
-        });
+        $(cat "${PREFIX}/lib/libsodium.asm.tmp.js" | sed 's|use asm||g')
       };
       $(cat "${PREFIX}/lib/libsodium.wasm.tmp.js")
     }).catch(function() {
