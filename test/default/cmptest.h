@@ -33,7 +33,7 @@
 # define rand(X) arc4random(X)
 #endif
 
-int xmain(void);
+static int xmain(void);
 
 static unsigned char *guard_page;
 
@@ -233,6 +233,6 @@ int main(void)
 
 #endif
 
-#define main xmain
+#define main static xmain
 
 #endif
